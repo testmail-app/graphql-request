@@ -1,8 +1,10 @@
 # @testmail.app/graphql-request
 
+[![GitHubCI](https://github.com/testmail-app/graphql-request/workflows/CI/badge.svg)]
+
 **This package is "under construction"! Please check back in a few days.**
 
-A **clone** of [graphql-request](https://github.com/prisma-labs/graphql-request) (a minimal GraphQL client supporting Node and browsers for scripts or simple apps) with added features like retries.
+Clone of [graphql-request](https://github.com/prisma-labs/graphql-request) (a minimal GraphQL client) with improvements like built-in retries.
 
 ## Features
 
@@ -10,11 +12,11 @@ A **clone** of [graphql-request](https://github.com/prisma-labs/graphql-request)
 
 - Most **simple and lightweight** GraphQL client
 - Promise-based API (works with `async` / `await`)
-- Typescript support (Flow coming soon)
+- Typescript support
 
 ### Added
 
-- Configurable retries
+- Configurable retries (see docs below)
 - API remains compatible with [graphql-request](https://github.com/prisma-labs/graphql-request) (no breaking changes)
 
 ## Install

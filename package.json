@@ -1,6 +1,6 @@
 {
   "name": "@testmail.app/graphql-request",
-  "description": "Clone of graphql-request with added features like retries",
+  "description": "Clone of graphql-request (a minimal GraphQL client) with improvements like built-in retries",
   "version": "0.0.0-semantic-release",
   "main": "dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
@@ -25,7 +25,9 @@
     "apollo"
   ],
   "author": "Amit <amit@testmail.app>",
-  "contributors": ["Johannes Schickling <johannes@graph.cool>"],
+  "contributors": [
+    "Johannes Schickling <johannes@graph.cool>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/testmail-app/graphql-request/issues"
@@ -39,17 +41,21 @@
     "size": "bundlesize"
   },
   "dependencies": {
-    "cross-fetch": "2.2.2"
+    "cross-fetch": "^3.0.4",
+    "fetch-retry": "^3.1.0"
   },
   "devDependencies": {
-    "@types/fetch-mock": "5.12.2",
-    "@types/node": "8.5.5",
-    "ava": "0.25.0",
-    "bundlesize": "0.17.0",
-    "fetch-cookie": "0.7.2",
-    "fetch-mock": "5.13.1",
-    "tslint": "5.9.1",
-    "tslint-config-standard": "7.0.0",
-    "typescript": "2.7.2"
+    "@types/fetch-mock": "^7.3.2",
+    "@types/node": "^13.11.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "ava": "^3.5.2",
+    "bundlesize": "^0.18.0",
+    "eslint": "^6.8.0",
+    "fetch-cookie": "^0.8.0",
+    "fetch-mock": "^9.3.1",
+    "tslint": "^6.1.1",
+    "tslint-config-standard": "^9.0.0",
+    "typescript": "^3.8.3"
   }
 }

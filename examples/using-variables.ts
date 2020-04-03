@@ -1,7 +1,7 @@
-import { request } from '../src'
+import { request } from '../src';
 
-;(async function() {
-  const endpoint = 'https://api.graph.cool/simple/v1/cixos23120m0n0173veiiwrjr'
+(async function(): Promise<void> {
+  const endpoint = 'https://api.graph.cool/simple/v1/cixos23120m0n0173veiiwrjr';
 
   const query = /* GraphQL */ `
     query getMovie($title: String!) {
@@ -12,16 +12,16 @@ import { request } from '../src'
         }
       }
     }
-  `
+  `;
 
   const variables = {
-    title: 'Inception',
-  }
+    title: 'Inception'
+  };
 
   interface TData {
-    Movie: { releaseDate: string; actors: Array<{ name: string }> }
+    Movie: { releaseDate: string; actors: Array<{ name: string }> };
   }
 
-  const data = await request<TData>(endpoint, query, variables)
-  console.log(JSON.stringify(data, undefined, 2))
-})().catch(error => console.error(error))
+  const data = await request<TData>(endpoint, query, variables);
+  console.log(JSON.stringify(data, undefined, 2));
+})().catch(error => console.error(error));
