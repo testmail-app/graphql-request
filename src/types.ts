@@ -1,5 +1,3 @@
-import { Response } from 'cross-fetch';
-
 export type Variables = { [key: string]: any }
 
 export interface Headers {
