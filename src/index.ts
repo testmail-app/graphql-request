@@ -10,6 +10,8 @@ import {
   RawResult
 } from './types';
 
+export { ClientError } from './types';
+
 // helper functions
 
 async function getResult(response: Response): Promise<any> {

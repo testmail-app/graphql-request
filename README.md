@@ -1,6 +1,6 @@
 # @testmail.app/graphql-request
 
-[![GitHubCI](https://github.com/testmail-app/graphql-request/workflows/CI/badge.svg)]
+![GitHubCI](https://github.com/testmail-app/graphql-request/workflows/ci/badge.svg)
 
 **This package is "under construction"! Please check back in a few days.**
 
