@@ -1,6 +1,6 @@
 # @testmail.app/graphql-request
 
-![GitHubCI](https://github.com/testmail-app/graphql-request/workflows/ci/badge.svg)] [![npm version](https://badge.fury.io/js/%40testmail.app%2Fgraphql-request.svg)](https://badge.fury.io/js/%40testmail.app%2Fgraphql-request)
+![GitHubCI](https://github.com/testmail-app/graphql-request/workflows/ci/badge.svg) [![npm version](https://badge.fury.io/js/%40testmail.app%2Fgraphql-request.svg)](https://badge.fury.io/js/%40testmail.app%2Fgraphql-request)
 
 Clone of [graphql-request](https://github.com/prisma-labs/graphql-request) (minimal GraphQL client) with improvements like built-in retries.
 
