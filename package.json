@@ -22,7 +22,8 @@
     "request",
     "fetch",
     "graphql-client",
-    "apollo"
+    "apollo",
+    "typescript"
   ],
   "author": "Amit <amit@testmail.app>",
   "contributors": [
