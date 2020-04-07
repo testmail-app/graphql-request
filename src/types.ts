@@ -4,7 +4,7 @@ export interface Headers {
   [key: string]: string;
 }
 
-// RequestDelayFunction, RequestRetryOnFunction, and Options taken from https://github.com/jonbern/fetch-retry/blob/master/index.d.ts
+// RequestDelayFunction and Options taken from https://github.com/jonbern/fetch-retry/blob/master/index.d.ts
 
 type RequestDelayFunction = ((
   attempt: number,

@@ -119,18 +119,8 @@ describe('test suite', function() {
         nock.enableNetConnect();
       }, 2000); // after 2s
       expect(await client.request(testQuery)).to.deep.equal(testResponse);
+      // it should have taken at least 2s (offline time)
       expect((Date.now() - startTimestamp) > 2000).to.equal(true);
     });
   });
 });
-
-
-// const scope = nock('https://api.testmail.app').persist().post('/api/graphql').reply(500);
-// const startTimestamp = Date.now();
-// nock.disableNetConnect();
-// setTimeout(() => {
-//   nock.enableNetConnect();
-// }, 5000); // after 5s
-// expect(await client.request(testQuery)).to.deep.equal(testResponse);
-// t.true((Date.now() - startTimestamp) > 5000);
-// scope.persist(false);
