@@ -4,16 +4,18 @@ export interface Headers {
   [key: string]: string;
 }
 
-export interface Options {
-  method?: RequestInit['method'];
-  headers?: Headers;
-  mode?: RequestInit['mode'];
-  credentials?: RequestInit['credentials'];
-  cache?: RequestInit['cache'];
-  redirect?: RequestInit['redirect'];
-  referrer?: RequestInit['referrer'];
-  referrerPolicy?: RequestInit['referrerPolicy'];
-  integrity?: RequestInit['integrity'];
+// RequestDelayFunction, RequestRetryOnFunction, and Options taken from https://github.com/jonbern/fetch-retry/blob/master/index.d.ts
+
+type RequestDelayFunction = ((
+  attempt: number,
+  error: Error | null,
+  response: Response | null
+) => number);
+
+export interface Options extends RequestInit {
+  retries?: number;
+  retryDelay?: number | RequestDelayFunction;
+  retryOn?: number[];
 }
 
 export interface GraphQLError {

@@ -1,7 +1,7 @@
 {
   "name": "@testmail.app/graphql-request",
   "description": "Clone of graphql-request (a minimal GraphQL client) with improvements like built-in retries",
-  "version": "0.0.0-semantic-release",
+  "version": "1.8.3",
   "main": "dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
   "files": [
@@ -36,8 +36,8 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "rm -rf dist && tsc -d",
-    "lint": "eslint '{examples,src,test}/**/*.ts'",
-    "test": "npm run lint && npm run build && ava --serial && npm run size",
+    "lint": "eslint '{examples,src,tests}/**/*.ts'",
+    "test": "npm run lint && npm run build && mocha \"./dist/tests/*.js\" && npm run size",
     "size": "bundlesize"
   },
   "dependencies": {
@@ -45,14 +45,19 @@
     "fetch-retry": "^3.1.0"
   },
   "devDependencies": {
-    "@types/fetch-mock": "^7.3.2",
+    "@types/chai": "^4.2.11",
+    "@types/chai-as-promised": "^7.1.2",
+    "@types/mocha": "^7.0.2",
     "@types/node": "^13.11.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
-    "ava": "^3.5.2",
     "bundlesize": "^0.18.0",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
     "eslint": "^6.8.0",
-    "fetch-mock": "^9.3.1",
+    "eslint-plugin-mocha": "^6.3.0",
+    "mocha": "^7.1.1",
+    "nock": "^12.0.3",
     "typescript": "^3.8.3"
   }
 }

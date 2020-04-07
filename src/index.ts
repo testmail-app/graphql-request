@@ -1,6 +1,6 @@
 import fetch from 'cross-fetch';
 import FetchRetry = require('fetch-retry');
-const fetchRetry = FetchRetry(fetch); // TODO configure retry behaviour
+const fetchRetry = FetchRetry(fetch);
 
 import {
   ClientError,
@@ -9,8 +9,6 @@ import {
   Variables,
   RawResult
 } from './types';
-
-export { ClientError } from './types';
 
 // helper functions
 
@@ -31,7 +29,14 @@ export class GraphQLClient {
 
   constructor(url: string, options?: Options) {
     this.url = url;
-    this.options = options || {};
+    this.options = Object.assign({
+      retries: 9,
+      retryDelay: function (attempt: number) {
+        // 1s, 2s, 4s, etc. upto 40s (max)
+        return Math.min(Math.pow(2, attempt) * 1000, 40000);
+      },
+      retryOn: [500, 502, 503, 504]
+    }, options);
   }
 
   async rawRequest<T extends any>(query: string, variables?: Variables): Promise<RawResult<T>> {
@@ -92,5 +97,7 @@ export async function request<T extends any>(url: string, query: string, variabl
   const client = new GraphQLClient(url);
   return client.request<T>(query, variables);
 }
+
+export { ClientError } from './types';
 
 export default request;
