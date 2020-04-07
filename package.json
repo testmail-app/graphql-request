@@ -1,6 +1,6 @@
 {
   "name": "@testmail.app/graphql-request",
-  "description": "Clone of graphql-request (a minimal GraphQL client) with improvements like built-in retries",
+  "description": "Clone of graphql-request (minimal GraphQL client) with improvements like built-in retries",
   "version": "1.8.3",
   "main": "dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
@@ -36,7 +36,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "rm -rf dist && tsc -d",
-    "lint": "eslint '{examples,src,tests}/**/*.ts'",
+    "lint": "eslint '{src,tests}/**/*.ts'",
     "test": "npm run lint && npm run build && mocha \"./dist/tests/*.js\" && npm run size",
     "size": "bundlesize"
   },

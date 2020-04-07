@@ -2,22 +2,13 @@
 
 ![GitHubCI](https://github.com/testmail-app/graphql-request/workflows/ci/badge.svg)
 
-**This package is "under construction"! Please check back in a few days.**
+Clone of [graphql-request](https://github.com/prisma-labs/graphql-request) (minimal GraphQL client) with improvements like built-in retries.
 
-Clone of [graphql-request](https://github.com/prisma-labs/graphql-request) (a minimal GraphQL client) with improvements like built-in retries.
+## Highlights
 
-## Features
-
-### graphql-request
-
-- Most **simple and lightweight** GraphQL client
-- Promise-based API (works with `async` / `await`)
-- Typescript support
-
-### Added
-
+- **Simple and lightweight** GraphQL client with a promise-based API (works with `async` / `await`) and typescript support
+- API compatible with [graphql-request](https://github.com/prisma-labs/graphql-request) (no breaking changes; drop-in replacement)
 - Configurable retries (see docs below)
-- API remains compatible with [graphql-request](https://github.com/prisma-labs/graphql-request) (no breaking changes)
 
 ## Install
 
@@ -26,8 +17,6 @@ npm install @testmail.app/graphql-request
 ```
 
 ## Quickstart
-
-Send a GraphQL query with a single line of code. ▶️ [Try it out](https://runkit.com/593130bdfad7120012472003/593130bdfad7120012472004).
 
 ```js
 import { request } from '@testmail.app/graphql-request'
@@ -39,25 +28,40 @@ const query = `{
       name
     }
   }
-}`
+}`;
 
 request('https://api.graph.cool/simple/v1/movies', query).then(data =>
   console.log(data)
-)
+);
 ```
 
-## Usage
+## Usage (with retries)
 
 ```js
 import { request, GraphQLClient } from '@testmail.app/graphql-request'
 
 // Run GraphQL queries/mutations using a static function
-request(endpoint, query, variables).then(data => console.log(data))
+request(endpoint, query, variables).then(data => console.log(data));
 
 // ... or create a GraphQL client instance to send requests
-const client = new GraphQLClient(endpoint, { headers: {} })
-client.request(query, variables).then(data => console.log(data))
+const client = new GraphQLClient(endpoint, { headers: {} });
+client.request(query, variables).then(data => console.log(data));
+
+// This is the default retry policy:
+const client = new GraphQLClient(endpoint, {
+  retries: 9,
+  retryDelay: function (attempt) {
+    // Exponential backoff: 1s, 2s, 4s, etc. upto 40s (max)
+    return Math.min(Math.pow(2, attempt) * 1000, 40000);
+  },
+  retryOn: [500, 502, 503, 504] // response status codes to retry on
+  // network connection errors are always retried
+});
 ```
+
+To override the default retry policy, replace any of those three arguments: `retries`, `retryDelay`, and `retryOn`.
+
+The options object (2nd argument to GraphQLClient constructor) passes along any additional parameters to [fetch](https://github.github.io/fetch/) - so you can easily configure the underlying fetch API :)
 
 ## Examples
 
@@ -93,8 +97,6 @@ async function main() {
 main().catch(error => console.error(error))
 ```
 
-[TypeScript Source](examples/authentication-via-http-header.ts)
-
 ### Passing more options to fetch
 
 ```js
@@ -126,8 +128,6 @@ async function main() {
 main().catch(error => console.error(error))
 ```
 
-[TypeScript Source](examples/passing-more-options-to-fetch.ts)
-
 ### Using variables
 
 ```js
@@ -157,8 +157,6 @@ async function main() {
 
 main().catch(error => console.error(error))
 ```
-
-[TypeScript Source](examples/using-variables.ts)
 
 ### Error handling
 
@@ -191,8 +189,6 @@ async function main() {
 main().catch(error => console.error(error))
 ```
 
-[TypeScript Source](examples/error-handling)
-
 ### Using `require` instead of `import`
 
 ```js
@@ -218,46 +214,6 @@ async function main() {
 
 main().catch(error => console.error(error))
 ```
-
-### Cookie support for `node`
-
-```sh
-npm install fetch-cookie
-```
-
-```js
-require('fetch-cookie/node-fetch')(require('node-fetch'))
-
-import { GraphQLClient } from '@testmail.app/graphql-request'
-
-async function main() {
-  const endpoint = 'https://api.graph.cool/simple/v1/cixos23120m0n0173veiiwrjr'
-
-  const graphQLClient = new GraphQLClient(endpoint, {
-    headers: {
-      authorization: 'Bearer MY_TOKEN',
-    },
-  })
-
-  const query = /* GraphQL */ `
-    {
-      Movie(title: "Inception") {
-        releaseDate
-        actors {
-          name
-        }
-      }
-    }
-  `
-
-  const data = await graphQLClient.rawRequest(query)
-  console.log(JSON.stringify(data, undefined, 2))
-}
-
-main().catch(error => console.error(error))
-```
-
-[TypeScript Source](examples/cookie-support-for-node)
 
 ### Receiving a raw response
 
@@ -292,5 +248,3 @@ async function main() {
 
 main().catch(error => console.error(error))
 ```
-
-[TypeScript Source](examples/receiving-a-raw-response)
