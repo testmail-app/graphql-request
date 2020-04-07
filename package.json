@@ -1,7 +1,7 @@
 {
   "name": "@testmail.app/graphql-request",
   "description": "Clone of graphql-request (minimal GraphQL client) with improvements like built-in retries",
-  "version": "1.8.3",
+  "version": "1.8.4",
   "main": "dist/src/index.js",
   "typings": "./dist/src/index.d.ts",
   "files": [
